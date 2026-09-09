@@ -33,3 +33,8 @@ data/*.bak*
 !data/*.csv
 !data/*.json
 
+# Documentación académica y archivos fuente locales
+docs/
+*.docx
+
+
