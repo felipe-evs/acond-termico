@@ -1,0 +1,12 @@
+item_historico,marca,modelo_historico,nombre_solotodo,tipo_normalizado,combustible,precio_historico_clp,precio_solotodo_max_clp,precio_solotodo_min_clp,tienda_max,num_tiendas,variacion_precio_clp,variacion_precio_pct,url_solotodo
+1,Toyotomi,KS 27,Toyotomi KS-27 (Rojo),Estufa Kerosene Mecha (Cámara Conv/Rad),Kerosene / Parafina,129990,229990,229990,Tienda Toyotomi,1,100000,76.9,https://www.solotodo.cl/products/38572
+2,Toyotomi,ML 25,Toyotomi ML-25,Estufa Kerosene Mecha (Cámara Conv/Rad),Kerosene / Parafina,159990,249990,249990,Tienda Toyotomi,1,90000,56.3,https://www.solotodo.cl/products/38576
+4,Toyotomi,Omni 230,Toyotomi Omni 230,Estufa Kerosene Mecha (Cámara Conv/Rad),Kerosene / Parafina,199990,329990,329990,Falabella,2,130000,65.0,https://www.solotodo.cl/products/38064
+7,Toyotomi,DC100,Toyotomi DC-100,Estufa Kerosene Mecha (Cámara Conv/Rad),Kerosene / Parafina,249990,379990,379990,Falabella,2,130000,52.0,https://www.solotodo.cl/products/38574
+12,Toyotomi,FF 55T,Toyotomi FF-55T,Estufa Kerosene Láser Tiro Forzado,Kerosene / Parafina,849900,1049990,1029990,Tienda Toyotomi,2,200090,23.5,https://www.solotodo.cl/products/37747
+13,Toyotomi,FF 55,Toyotomi FF-55,Estufa Kerosene Láser Tiro Forzado,Kerosene / Parafina,899990,1029990,1029990,Tienda Toyotomi,1,130000,14.4,https://www.solotodo.cl/products/37785
+18,Mademsa,MFHK 540,Mademsa MFHK 540,Estufa Kerosene Láser (Electrónica),Kerosene / Parafina,221990,349990,349990,Ripley,1,128000,57.7,https://www.solotodo.cl/products/43822
+20,Sumoheat,FH 1050,Sumoheat FH-1050,Estufa Kerosene Láser (Electrónica),Kerosene / Parafina,249990,427990,427990,Travel Tienda,1,178000,71.2,https://www.solotodo.cl/products/44780
+47,Magefesa,MGF 1237,Magefesa MGF-1237,Termoventilador Eléctrico,Electricidad,12990,16734,16734,Mercado Libre (RHOINTER_CHILE),1,3744,28.8,https://www.solotodo.cl/products/112312
+63,Bosca,Eco 380,Bosca Eco 380,Estufa a Leña Combustión Lenta,Leña,193990,609990,399990,Mercado Libre (Bosca),11,416000,214.4,https://www.solotodo.cl/products/37962
+66,Bosca,Eco 350,Bosca Eco 350,Estufa a Leña Combustión Lenta,Leña,149900,549990,319990,Mercado Libre (Bosca),16,400090,266.9,https://www.solotodo.cl/products/37963

@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.pytest_cache/
+
+# Backups and temporary files
+*.bak
+*.bak_*
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+
+# Development & cache tools
+graphify-out/
+output/
+.opencode/
+.specify/
+
+# Data: Keep SQLite database and data files, ignore database backups
+data/*.bak*
+!data/acond-termico.db
+!data/*.csv
+!data/*.json
+
