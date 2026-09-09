@@ -482,7 +482,7 @@ elif menu_option == "📊 Matriz de Elección CAE por Gcal":
         
         $$FRC(r, N) = \\frac{r \\cdot (1 + r)^N}{(1 + r)^N - 1}$$
         
-        * **Ejemplo Práctico:** Con $r = 8\\%$ y vida útil $N = 15\\text{ años}$, el $FRC \\approx 0{,}1168$. Esto significa que por cada \\$1.000.000 invertido en comprar e instalar el sistema, el costo de amortización anualizado es de **\\$116.829 al año**.
+        * **Ejemplo Práctico:** Con $r = 8\\%$ y vida útil $N = 15\\text{ años}$, el $FRC \\approx 0{,}1168$. Esto significa que por cada 1.000.000 CLP invertidos en comprar e instalar el sistema, el costo de amortización anualizado es de **116.829 CLP al año**.
         * **Impacto en la Selección:** Una tasa de descuento alta castiga a las tecnologías eficientes de mayor inversión inicial (como Bombas de Calor / Split Inverter o estufas a pellet), favoreciendo erróneamente a artefactos muy baratos de comprar pero carísimos de operar (como termoventiladores o estufas halógenas).
         
         ---
@@ -490,11 +490,11 @@ elif menu_option == "📊 Matriz de Elección CAE por Gcal":
         ### 2. ¿Cómo se calculan los Costos Fijos Anualizados ($C_{\\text{fijo}}$)?
         Agrupan todos los costos que no dependen de cuántas horas funcione el equipo en el invierno:
         
-        $$C_{\\text{fijo}} = N_{\\text{equipos}} \\times \\left[ (I_{\\text{adquisición}} + C_{\\text{instalación}}) \\times FRC(r, N) + C_{\\text{mantención anual}} \\right] \\quad [\\$/\\text{año}]$$
+        $$C_{\\text{fijo}} = N_{\\text{equipos}} \\times \\left[ (I_{\\text{adquisición}} + C_{\\text{instalación}}) \\times FRC(r, N) + C_{\\text{mantención anual}} \\right] \\quad [\\text{CLP/año}]$$
         
         * **$I_{\\text{adquisición}}$:** Precio de compra en el comercio minorista c/IVA (rescatado de SoloTodo al precio vigente más alto del mercado para resguardar holgura presupuestaria).
-        * **$C_{\\text{instalación}}$:** Costo de instalación técnica (\\$100.000 para Splits Inverter; \\$120.000 para estufas a pellet y leña por cañones y pasamuros; \\$0 para estufas móviles).
-        * **$C_{\\text{mantención anual}}$:** Costo de inspección preventiva anual, limpieza de filtros/quemadores y deshollinado SEC (\\$10.000 a \\$45.000/año según tecnología).
+        * **$C_{\\text{instalación}}$:** Costo de instalación técnica (100.000 CLP para Splits Inverter; 120.000 CLP para estufas a pellet y leña por cañones y pasamuros; 0 CLP para estufas móviles).
+        * **$C_{\\text{mantención anual}}$:** Costo de inspección preventiva anual, limpieza de filtros/quemadores y deshollinado SEC (10.000 a 45.000 CLP/año según tecnología).
         * **$N_{\\text{equipos}}$:** Número de unidades requeridas según la demanda peak de la vivienda (ver punto 4).
         
         ---
@@ -504,7 +504,7 @@ elif menu_option == "📊 Matriz de Elección CAE por Gcal":
         
         Sabiendo que $1\\text{ Gcal} = 1.000.000\\text{ kcal} = 1.162{,}79\\text{ kWh}_{\\text{térmicos}}$:
         
-        $$C_{\\text{var, kWh}} = \\frac{P_{\\text{combustible}}}{PCI \\times \\eta} \\quad [\\$/\\text{kWh}_t] \\qquad \\text{y} \\qquad C_{\\text{var, Gcal}} = C_{\\text{var, kWh}} \\times 1.162{,}79 \\quad [\\$/\\text{Gcal}]$$
+        $$C_{\\text{var, kWh}} = \\frac{P_{\\text{combustible}}}{PCI \\times \\eta} \\quad [\\text{CLP/kWh}_t] \\qquad \\text{y} \\qquad C_{\\text{var, Gcal}} = C_{\\text{var, kWh}} \\times 1.162{,}79 \\quad [\\text{CLP/Gcal}]$$
         
         * **$P_{\\text{combustible}}$:** Precio unitario de la energía en la ciudad o zona térmica seleccionada (Tabla 2).
         * **$PCI$:** Poder Calorífico Inferior del combustible en $\\text{kWh/unidad}$ (Electricidad: 1.0, Parafina: 9.93, GLP: 12.66, Gas Natural: 9.91, Pellet: 3.87, Leña: 3.87).
@@ -518,7 +518,7 @@ elif menu_option == "📊 Matriz de Elección CAE por Gcal":
         1. **Número de Equipos Requeridos ($N_{\\text{equipos}}$):**
            $$N_{\\text{equipos}} = \\max\\left(1, \\left\\lceil \\frac{P_{\\text{peak, vivienda}}}{P_{\\text{nominal, equipo}}} \\right\\rceil\\right)$$
            * *Ejemplo:* Si una vivienda social en Temuco requiere $5{,}0\\text{ kW}$ peak para no pasar frío y se evalúa un convector de $1{,}5\\text{ kW}$, se requieren $N = \\lceil 5{,}0 / 1{,}5 \\rceil = 4\\text{ convectores}$.
-           * Esto multiplica automáticamente la inversión inicial ($4 \\times \\$35.000 = \\$140.000$) y el consumo total, evitando la falacia de creer que un artefacto pequeño es suficiente para calentar una casa completa.
+           * Esto multiplica automáticamente la inversión inicial (4 equipos $\\times$ 35.000 CLP = 140.000 CLP) y el consumo total, evitando la falacia de creer que un artefacto pequeño es suficiente para calentar una casa completa.
         2. **Superficie Máxima Calefaccionable ($m^2$):**
            $$S_{\\text{máx}} = \\frac{P_{\\text{nominal}} \\times 1.000}{q_{\\text{específica}}} \\quad [m^2]$$
            Con $q_{\\text{específica}} \\approx 60\\text{ W/m}^2$ para viviendas sociales estándar aisladas.
@@ -529,13 +529,13 @@ elif menu_option == "📊 Matriz de Elección CAE por Gcal":
         
         ### 5. ¿Qué otros cálculos avanzados se pueden realizar?
         * **LCOH (Levelized Cost of Heat / Costo Nivelado del Calor):** Costo total anual dividido por la demanda anual entregada:
-          $$LCOH = \\frac{CAE_{\\text{total}}}{\\text{Demanda Anual [kWh}_t\\text{]}} \\quad [\\$/\\text{kWh}_t] \\qquad \\text{y en UF/kWh}_t = \\frac{LCOH}{\\text{Valor UF}}$$
+          $$LCOH = \\frac{CAE_{\\text{total}}}{\\text{Demanda Anual [kWh}_t\\text{]}} \\quad [\\text{CLP/kWh}_t] \\qquad \\text{y en UF/kWh}_t = \\frac{LCOH}{\\text{Valor UF}}$$
           *(Métrica oficial exigida en el informe borrador de la investigación)*.
-        * **Costo Operativo Horario a Potencia Nominal ($/hora):**
-          $$C_{\\text{horario}} = \\text{Tasa de Consumo} \\times P_{\\text{combustible}} \\times N_{\\text{equipos}} \\quad [\\$/\\text{h}]$$
+        * **Costo Operativo Horario a Potencia Nominal (CLP/hora):**
+          $$C_{\\text{horario}} = \\text{Tasa de Consumo} \\times P_{\\text{combustible}} \\times N_{\\text{equipos}} \\quad [\\text{CLP/h}]$$
           Muestra en pesos cuánto cuesta tener el sistema encendido 1 hora a plena capacidad.
-        * **Costo Anual Equivalente Total ($CAE_{\\text{total}}$ en $/año):**
-          $$CAE_{\\text{total}} = C_{\\text{fijo anualizado}} + (C_{\\text{var, kWh}} \\times \\text{Demanda Anual [kWh]})$$
+        * **Costo Anual Equivalente Total ($CAE_{\\text{total}}$ en CLP/año):**
+          $$CAE_{\\text{total}} = C_{\\text{fijo anualizado}} + (C_{\\text{var, kWh}} \\times \\text{Demanda Anual [kWh]}) \\quad [\\text{CLP/año}]$$
         * **Período de Retorno (Payback):** Tiempo necesario para recuperar la mayor inversión de un equipo eficiente mediante el ahorro operacional generado frente a una estufa base ineficiente.
         """)
 
