@@ -254,36 +254,47 @@ def render_curacion_vista():
 
         st.markdown("---")
         st.subheader("5. Comparativa Metodológica: Medoide Real vs Centroide Sintético")
-        st.markdown("El sistema permite seleccionar dinámicamente entre dos paradigmas de síntesis representativa:")
+        st.markdown("El sistema permite alternar dinámicamente entre dos paradigmas de síntesis representativa según el propósito de la investigación:")
 
-        comp_data = [
-            {
-                "Atributo": "Definición Conceptual",
-                "🔘 Medoide Real (K-Medoids / PAM)": "Selecciona el producto comercial existente en el mercado que minimiza la distancia multidimensional al baricentro del estrato.",
-                "⚪ Centroide Sintético (Equipo Tipo)": "Calcula un equipo virtual cuyas especificaciones son las medianas estadísticas de todos los equipos del estrato.",
-            },
-            {
-                "Atributo": "Formulación Matemática",
-                "🔘 Medoide Real (K-Medoids / PAM)": r"$$i^* = \arg\min_{i \in \mathcal{C}} \sum_{j \in \mathcal{C}} \|\tilde{\mathbf{x}}_i - \tilde{\mathbf{x}}_j\|_2$$",
-                "⚪ Centroide Sintético (Equipo Tipo)": r"$$\mathbf{x}_{\text{tipo}} = \left( \text{med}(P), \text{med}(C_{\text{adq}}), \text{med}(\eta) \right)$$",
-            },
-            {
-                "Atributo": "Validez Comercial y Trazabilidad",
-                "🔘 Medoide Real (K-Medoids / PAM)": "100% Real: tiene marca, modelo comercial, URL activa de tienda y precio de lista c/IVA real verificado.",
-                "⚪ Centroide Sintético (Equipo Tipo)": "Hipotético: no corresponde a una marca única ni se puede comprar directamente en tienda.",
-            },
-            {
-                "Atributo": "Cumplimiento Certificación SEC",
-                "🔘 Medoide Real (K-Medoids / PAM)": "Garantizado: posee código de homologación SEC real y parámetros de placa de fabricante.",
-                "⚪ Centroide Sintético (Equipo Tipo)": "Teórico: representa la tecnología abstracta pero carece de código QR SEC específico.",
-            },
-            {
-                "Atributo": "Aplicación Preferente",
-                "🔘 Medoide Real (K-Medoids / PAM)": "Recomendado para Optimización MILP, licitaciones SERVIU y selección de subsidios habitacionales ejecutables.",
-                "⚪ Centroide Sintético (Equipo Tipo)": "Modelos de equilibrio general, proyecciones macroeconómicas agregadas o diseño de normas sin sesgo de marca.",
-            },
-        ]
-        st.dataframe(pd.DataFrame(comp_data), use_container_width=True, hide_index=True)
+        col_med, col_cent = st.columns(2)
+        with col_med:
+            st.markdown("#### 🔘 Medoide Real (K-Medoids / PAM)")
+            st.info("🎯 **Recomendado para el estudio.** Selecciona el producto comercial físico existente en el mercado que minimiza la distancia multidimensional al baricentro del estrato.")
+            st.markdown("**Formulación Matemática (Algoritmo PAM / K-Medoids):**")
+            st.latex(r"i^* = \arg\min_{i \in \mathcal{C}} \sum_{j \in \mathcal{C}} \|\tilde{\mathbf{x}}_i - \tilde{\mathbf{x}}_j\|_2")
+            st.markdown(r"""
+            Donde el vector de características normalizadas por *z-score* es:
+            $$\tilde{\mathbf{x}} = \left( \frac{P - \mu_P}{\sigma_P}, \; \frac{C_{\text{adq}} - \mu_C}{\sigma_C}, \; \frac{\eta - \mu_\eta}{\sigma_\eta} \right)$$
+            
+            * **Validez Comercial:** **100% Real**. Posee marca, modelo comercial, tienda oferente, URL activa y precio de lista c/IVA real verificado.
+            * **Certificación SEC:** Posee código de homologación SEC real y placa de fabricante.
+            * **Uso Preferente:** Optimización MILP, licitaciones SERVIU, programas de recambio de calefactores y subsidios habitacionales ejecutables (DS10/DS19).
+            """)
+
+        with col_cent:
+            st.markdown("#### ⚪ Centroide Sintético (Equipo Tipo)")
+            st.info("📐 **Modelo Estadístico de Referencia.** Genera un equipo virtual cuyas especificaciones son las medianas robustas de todos los equipos agrupados en el estrato.")
+            st.markdown("**Formulación Matemática (Baricentro Multidimensional):**")
+            st.latex(r"\mathbf{x}_{\text{tipo}} = \left( \text{med}(P), \; \text{med}(C_{\text{adq}}), \; \text{med}(\eta) \right)")
+            st.markdown(r"""
+            Donde $\text{med}(\cdot)$ representa la mediana muestral del estrato para cada parámetro físico y económico:
+            $$\text{med}(X) = \text{percentil}_{50}(X)$$
+            
+            * **Validez Comercial:** **Hipotético**. No corresponde a una marca única ni se puede adquirir directamente en el retail.
+            * **Certificación SEC:** Teórico (representa las propiedades promedio pero carece de código QR SEC específico).
+            * **Uso Preferente:** Modelos macroeconómicos agregados, proyecciones de equilibrio general y diseño de normas sin sesgo de marca comercial.
+            """)
+
+        st.markdown("##### Cuadro Resumen Comparativo")
+        st.markdown("""
+| Dimensión Evaluada | 🔘 Medoide Real (K-Medoids / PAM) | ⚪ Centroide Sintético (Equipo Tipo) |
+| :--- | :--- | :--- |
+| **Naturaleza del Artefacto** | Producto comercial físico y vigente en retail | Entidad matemática virtual promediada |
+| **Trazabilidad y Cotización** | Inmediata (marca, modelo, tienda y URL activa) | Teórica (requiere costeo presupuestario de referencia) |
+| **Certificación SEC** | Garantizada (código QR oficial y ensayos de laboratorio) | No aplicable (parámetros abstractos del estrato) |
+| **Idoneidad en Optimización** | Alta (soluciones ejecutables con costos y catálogos reales) | Media (útil para análisis paramétrico agregado) |
+| **Independencia de Marcas** | Selecciona la marca óptima según distancia matemática | Totalmente neutro (sin marca ni tienda específica) |
+""")
 
         st.markdown("---")
         st.subheader("6. Referencias Bibliográficas y Normativas Académicas")
