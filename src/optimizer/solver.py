@@ -7,9 +7,10 @@ from src.optimizer.model import resolver_escenario
 logger = logging.getLogger(__name__)
 
 
-def ejecutar_optimizacion():
+def ejecutar_optimizacion(equipos=None):
     escenarios = leer_escenarios()
-    equipos = leer_equipos()
+    if equipos is None:
+        equipos = leer_equipos()
     parametros = leer_parametros()
 
     if not escenarios:

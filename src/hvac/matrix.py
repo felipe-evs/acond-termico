@@ -76,6 +76,7 @@ def calcular_matriz(
     potencia_peak_kw=None,
     valor_uf=VALOR_UF_DEFAULT,
     q_especifica_w_m2=60.0,
+    equipos_df=None,
 ):
     if tasa_descuento is None:
         tasa_descuento = TASA_DESCUENTO_DEFAULT
@@ -95,20 +96,40 @@ def calcular_matriz(
     else:
         frc = 0.0
 
-    conn = get_connection()
-    cur = conn.execute("""
-        SELECT e.id as equipo_id, e.modelo, e.marca, e.potencia_nominal_kw,
-               e.rendimiento_termico_pct, e.cop_calor, e.costo_adquisicion_clp,
-               e.tasa_consumo, e.unidad_tasa_consumo, e.costo_instalacion_clp,
-               e.costo_mantencion_anual_clp, t.nombre as tecnologia, c.nombre as combustible
-        FROM hvac_equipo e
-        JOIN hvac_tipo_tecnologia t ON e.tipo_tecnologia_id = t.id
-        JOIN hvac_combustible c ON e.combustible_id = c.id
-    """)
+    if equipos_df is not None and not equipos_df.empty:
+        records = []
+        for _, r_val in equipos_df.iterrows():
+            records.append({
+                "equipo_id": r_val.get("id") if "id" in r_val else r_val.get("equipo_id"),
+                "modelo": r_val["modelo"],
+                "marca": r_val.get("marca", "") or "",
+                "potencia_nominal_kw": r_val.get("potencia_nominal_kw"),
+                "rendimiento_termico_pct": r_val.get("rendimiento_termico_pct"),
+                "cop_calor": r_val.get("cop_calor"),
+                "costo_adquisicion_clp": r_val.get("costo_adquisicion_clp"),
+                "tasa_consumo": r_val.get("tasa_consumo"),
+                "unidad_tasa_consumo": r_val.get("unidad_tasa_consumo", ""),
+                "costo_instalacion_clp": r_val.get("costo_instalacion_clp", 0),
+                "costo_mantencion_anual_clp": r_val.get("costo_mantencion_anual_clp", 0),
+                "tecnologia": r_val.get("tecnologia"),
+                "combustible": r_val.get("combustible"),
+            })
+    else:
+        conn = get_connection()
+        cur = conn.execute("""
+            SELECT e.id as equipo_id, e.modelo, e.marca, e.potencia_nominal_kw,
+                   e.rendimiento_termico_pct, e.cop_calor, e.costo_adquisicion_clp,
+                   e.tasa_consumo, e.unidad_tasa_consumo, e.costo_instalacion_clp,
+                   e.costo_mantencion_anual_clp, t.nombre as tecnologia, c.nombre as combustible
+            FROM hvac_equipo e
+            JOIN hvac_tipo_tecnologia t ON e.tipo_tecnologia_id = t.id
+            JOIN hvac_combustible c ON e.combustible_id = c.id
+        """)
+        records = [dict(r_item) for r_item in cur.fetchall()]
+        conn.close()
 
     rows = []
-    for r_item in cur.fetchall():
-        row = dict(r_item)
+    for row in records:
         p_nom = float(row["potencia_nominal_kw"] or 1.0)
 
         # Incorporación de Potencia: Número de equipos requeridos para suplir la carga peak
@@ -166,5 +187,4 @@ def calcular_matriz(
             "superficie_estimada_m2": round(superficie_estimada_m2, 1),
         })
 
-    conn.close()
     return rows

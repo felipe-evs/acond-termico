@@ -36,6 +36,11 @@ def construir_milp(escenario, equipos, parametros):
 
 
 def resolver_escenario(escenario, equipos, parametros):
+    try:
+        import pulp
+    except ImportError:
+        return None, "pulp no instalado"
+
     prob, variables = construir_milp(escenario, equipos, parametros)
     if prob is None:
         return None, variables
@@ -45,7 +50,6 @@ def resolver_escenario(escenario, equipos, parametros):
     except Exception as e:
         return None, str(e)
 
-    import pulp
     if pulp.LpStatus[prob.status] == "Optimal":
         seleccionados = []
         for eq in equipos:
