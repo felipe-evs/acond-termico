@@ -125,6 +125,9 @@ def load_detailed_prices():
     """
     df = pd.read_sql(query, conn)
     conn.close()
+    return df
+
+
 def render_curacion_vista():
     st.markdown("<h2 class='main-title'>🔬 Curación del Catálogo y Muestra Representativa (~70 Equipos)</h2>", unsafe_allow_html=True)
     st.markdown(
